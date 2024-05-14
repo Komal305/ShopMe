@@ -59,5 +59,28 @@ public void testGetUserById() {
 	System.out.println(userNam);
 	assertThat(userNam).isNotNull();
 }
+@Test
+public void testUpdateDetails() {
+	User userNam=repo.findById(1).get();
+	userNam.setEnabled(true);
+	userNam.setEmail("komal123@gmail.com");
+	repo.save(userNam);	
+}
+
+@Test
+public void testUpdateUserRole() {
+	User userRavi=repo.findById(15).get();
+	Role roleEditor=new Role(5);
+	Role roleSalesperson= new Role(6);
+	userRavi.getRoles().remove(roleEditor);
+	userRavi.addRoles(roleSalesperson);
+	repo.save(userRavi);
+}
+
+@Test
+public void testDeleteUser() {
+	Integer userId=12;
+	repo.deleteById(userId);
+}
 
 }

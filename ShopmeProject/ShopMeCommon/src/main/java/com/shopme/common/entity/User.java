@@ -30,7 +30,7 @@ private Integer id;
 	private String lastName ;
 	@Column(length = 64)
 	private String photos;
-	private String enabled ;
+	private boolean enabled ;
 	
 	@ManyToMany
 	@JoinTable(name="user_roles", 
@@ -52,7 +52,7 @@ private Integer id;
 		
 	}
 	public User(Integer id, String email, String password, String firstName, String lastName, String photos,
-			String enabled, Set<Role> roles) {
+			boolean enabled, Set<Role> roles) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -112,11 +112,11 @@ private Integer id;
 		this.photos = photos;
 	}
 
-	public String getEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(String enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
