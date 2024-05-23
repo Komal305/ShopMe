@@ -79,7 +79,7 @@ public boolean equals(Object obj) {
 }
 @Override
 public String toString() {
-	return "Role [name=" + name + "]";
+	return this.name;
 }
 
 	
