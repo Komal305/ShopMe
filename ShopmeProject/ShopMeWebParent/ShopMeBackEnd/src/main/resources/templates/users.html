@@ -59,6 +59,11 @@
 	</nav></div>	
 	<div>
        <h2>Manage Users</h2>
+       <a th:href="@{/users/new}">create new user</a>
+	</div>
+	
+	<div th:if="${message!=null}" class="alert alert-success ext-center">
+	[[${message}]]	
 	</div>
 	
 	<div>
