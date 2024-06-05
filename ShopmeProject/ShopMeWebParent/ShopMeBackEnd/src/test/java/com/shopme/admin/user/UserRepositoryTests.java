@@ -85,4 +85,10 @@ assertThat(savedUser.getId()).isGreaterThan(0);
 //	repo.deleteById(userId);
 //}
 
+//@Test
+//public void testGetUserByEmail() {
+//	String email="nikhil@gmail.com";
+//	User user = repo.getUserByEmail(email);
+//	assertThat(user).isNotNull();
+//}
 }
