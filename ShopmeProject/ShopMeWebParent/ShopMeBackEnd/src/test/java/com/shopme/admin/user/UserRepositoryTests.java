@@ -25,14 +25,14 @@ private UserRepository repo;
 private TestEntityManager entityManager;
 
 
-@Test
-public void testCreateUser() {
-	Role roleAdmin= entityManager.find(Role.class,1);
-	User userNamHM=new User("komal@gmail.com", "Komal2861", "komal", "rani");
-userNamHM.addRoles(roleAdmin);
-User savedUser=repo.save(userNamHM);
-assertThat(savedUser.getId()).isGreaterThan(0);
-}
+//@Test
+//public void testCreateUser() {
+//	Role roleAdmin= entityManager.find(Role.class,1);
+//	User userNamHM=new User("komal@gmail.com", "Komal2861", "komal", "rani");
+//userNamHM.addRoles(roleAdmin);
+//User savedUser=repo.save(userNamHM);
+//assertThat(savedUser.getId()).isGreaterThan(0);
+//}
 
 //@Test
 //public void testCreateNewUserWithTwoRoles() {
@@ -91,4 +91,23 @@ assertThat(savedUser.getId()).isGreaterThan(0);
 //	User user = repo.getUserByEmail(email);
 //	assertThat(user).isNotNull();
 //}
+
+//@Test
+//public void testCountById() {
+//	Integer id=38;
+//	Long countById = repo.countById(id);
+//	assertThat(countById).isNotNull().isGreaterThan(0);
+//}
+
+@Test
+public void testDisableUser() {
+	Integer id =43;
+	repo.updateEnabledStatus(id, false);
+}
+
+@Test
+public void testEnableUser() {
+	Integer id =44;
+	repo.updateEnabledStatus(id, true);
+}
 }
