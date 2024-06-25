@@ -18,3 +18,13 @@ public interface UserRepository extends CrudRepository<User, Integer>
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);
 }
+
+//class Vijeta{
+//	public void bhagya() {
+//		System.out.println("she sleep");
+//	}
+//}
+//main{
+//	Vijeta v=new Vijeta();
+//	v.bhagya();
+//}
