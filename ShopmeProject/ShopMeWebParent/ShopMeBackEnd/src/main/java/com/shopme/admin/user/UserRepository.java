@@ -15,18 +15,9 @@ public interface UserRepository extends  CrudRepository<User, Integer>, PagingAn
 	public User getUserByEmail(@Param("email") String email);
 	
 	public Long countById(Integer id);
-	
+
 	@Query("UPDATE User u SET u.enabled = ?2 WHERE u.id = ?1")
 	@Modifying
 	public void updateEnabledStatus(Integer id, boolean enabled);
 }
 
-//class Vijeta{
-//	public void bhagya() {
-//		System.out.println("she sleep");
-//	}
-//}
-//main{
-//	Vijeta v=new Vijeta();
-//	v.bhagya();
-//}
