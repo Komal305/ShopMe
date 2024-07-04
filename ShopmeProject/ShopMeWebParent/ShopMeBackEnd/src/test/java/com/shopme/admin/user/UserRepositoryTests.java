@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.annotation.Rollback;
 
 import com.shopme.common.entity.Role;
@@ -21,8 +22,10 @@ import com.shopme.common.entity.User;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@EnableJpaRepositories
 public class UserRepositoryTests {
-@Autowired
+	
+@Autowired 
 private UserRepository repo;
 @Autowired
 private TestEntityManager entityManager;
@@ -114,16 +117,29 @@ private TestEntityManager entityManager;
 //	repo.updateEnabledStatus(id, true);
 //}
 
+//@Test
+//public void testListFirstPage() {
+//	int pageNumber=0;
+//	int pageSize=4;
+//	 Pageable pageable=PageRequest.of(pageNumber, pageSize);
+//	 Page<User> page= repo.findAll(pageable);
+//	 
+//	 List<User> listUsers = page.getContent();
+//	 listUsers.forEach(user -> System.out.println(user));
+//	 assertThat(listUsers.size()).isEqualByComparingTo(pageSize);
+//}
+
 @Test
-public void testListFirstPage() {
+public void testSearchUsers() {
+	String keyword="Arya";
 	int pageNumber=0;
 	int pageSize=4;
 	 Pageable pageable=PageRequest.of(pageNumber, pageSize);
-	 Page<User> page= repo.findAll(pageable);
+	 Page<User> page= repo.findAll(keyword, pageable);
 	 
 	 List<User> listUsers = page.getContent();
 	 listUsers.forEach(user -> System.out.println(user));
-	 assertThat(listUsers.size()).isEqualByComparingTo(pageSize);
+	 assertThat(listUsers.size()).isGreaterThan(0);
 }
 
 }
