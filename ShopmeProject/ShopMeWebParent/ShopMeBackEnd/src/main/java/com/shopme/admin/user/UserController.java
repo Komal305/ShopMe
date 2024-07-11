@@ -20,6 +20,8 @@ import com.shopme.admin.FileUploadUtil;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 public class UserController {
 
@@ -88,7 +90,13 @@ public class UserController {
        }
       		redirectAttributes.addFlashAttribute("message" , "The user has been saved successfully." );
 	
-       return "redirect:/users";
+      		
+      	return getRedirectURLtoAffectedUser(user);
+	}
+
+	private String getRedirectURLtoAffectedUser(User user) {
+		String firstPartOfEmail=user.getEmail().split("@")[0];	
+       return "redirect:/users/page/1?sortField=id&sortDir=asc&keyword="+firstPartOfEmail;
 	}
 	
 	@GetMapping("/users/edit/{id}")
@@ -131,5 +139,26 @@ public class UserController {
 			String message="The user id "+id+" has been "+status;
 			redirectAttributes.addFlashAttribute("message", message);
 			return "redirect:/users";
+		}
+		
+		@GetMapping("/users/export/csv")
+		public void exportToCSV(HttpServletResponse response) throws IOException {
+			List<User> listUser=service.listAll(); 
+			UserCsvExporter exporter = new UserCsvExporter();
+			exporter.export(listUser, response);
+		}
+		
+		@GetMapping("/users/export/excel")
+		public void exportToEXCEL(HttpServletResponse response) throws IOException {
+			List<User> listUser=service.listAll(); 
+			UserExcelExporter exporter = new UserExcelExporter();
+			exporter.export(listUser, response);
+		}
+		
+		@GetMapping("/users/export/pdf")
+		public void exportToPDF(HttpServletResponse response) throws IOException {
+			List<User> listUser=service.listAll(); 
+			UserPdfExporter exporter = new UserPdfExporter();
+			exporter.export(listUser, response);
 		}
 }
