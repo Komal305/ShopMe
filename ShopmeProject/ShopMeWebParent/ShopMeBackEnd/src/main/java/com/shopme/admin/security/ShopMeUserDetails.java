@@ -1,12 +1,14 @@
 package com.shopme.admin.security;
-
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
 public class ShopMeUserDetails implements UserDetails {
@@ -15,7 +17,13 @@ public class ShopMeUserDetails implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		Set<Role> roles = user.getRoles();
+		List<SimpleGrantedAuthority> authories=new ArrayList<>();
+		
+		for(Role role: roles) {
+			authories.add(new SimpleGrantedAuthority(role.getName()));
+		}
+		return authories;
 	}
 
 	public ShopMeUserDetails(User user) {
@@ -30,7 +38,7 @@ public class ShopMeUserDetails implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return user.getFullName();
+		return user.getEmail();
 	}
 
 	@Override
@@ -52,7 +60,18 @@ public class ShopMeUserDetails implements UserDetails {
 	public boolean isEnabled() {
 		return user.getEnabled();
 	}
-
 	
+	public String getFullName() {
+		return this.user.getFirstName()+" "+this.user.getLastName();
+	}
+
+	public void setFirstName(String firstName) {
+		this.user.setFirstName(firstName); 
+	}
+
+
+	public void setLastName(String lastName) {
+		this.user.setLastName(lastName); 
+	}
 
 }

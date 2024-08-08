@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.admin.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
+import com.shopme.admin.export.UserCsvExporter;
+import com.shopme.admin.export.UserExcelExporter;
+import com.shopme.admin.export.UserPdfExporter;
+import com.shopme.admin.user.UserNotFoundException;
+import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
@@ -28,12 +33,12 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("/users")
+	@GetMapping("users")
 	public String listAll(Model model) {
 		return listByPage(1, model, "id", "asc",null );
 	}
 	
-	@GetMapping("users/page/{pageNum}")
+	@GetMapping("/users/page/{pageNum}")
 	public String listByPage(@PathVariable(name="pageNum") int pageNum, Model model,
 			@Param("sortField") String sortField, @Param("sortDir") String sortDir,
 			@Param("keyword") String keyword){
@@ -74,7 +79,7 @@ public class UserController {
 		return "user_form";
 	}
 	
-	@PostMapping("users/save")
+	@PostMapping("/users/save")
 	public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image") MultipartFile multipartFile) throws IOException {
        if(!multipartFile.isEmpty()) {
 		String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -83,7 +88,7 @@ public class UserController {
 		String uploadDir = "user-photos/"+savedUser.getId();
 		FileUploadUtil.cleanDir(uploadDir);
 		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		//		service.save(user);
+		
        }else {
     	   if(user.getPhotos().isEmpty())user.setPhotos(null);
     	   service.save(user);
