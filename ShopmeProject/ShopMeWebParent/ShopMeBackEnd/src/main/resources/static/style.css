@@ -20,6 +20,7 @@
 @media screen and (min-width: 1024px)
 {
 	div.less-details{display: none;}
+	div.full-details{display: block;}
 	 .hideable-column {display: table-cell;}
 	
 }

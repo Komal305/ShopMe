@@ -30,8 +30,7 @@ public class WebSecurityConfig {
       http
           .csrf(csrf -> csrf.disable())
           .authorizeHttpRequests(auth -> auth
-              .requestMatchers("/users/**").hasRole("Admin")
-              //.requestMatchers("/images/**", "/js/**", "/webjars/**").permitAll()
+              .requestMatchers("/users/**").permitAll() //hasRole("Admin")
               .anyRequest().authenticated()
           )
           .formLogin(formLogin -> formLogin

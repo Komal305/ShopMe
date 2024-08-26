@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace= "fragments :: page_head('User - Shopme User')"/>
+<head th:replace= "fragments :: page_head('User - Shopme User', 'none')" />
 
 <body>
+	
 	<div class="container-fluid">
-	<div th:replace="navigation :: menu"></div>
+	<div th:replace="navigation :: menu"> </div>
 		
 	<div>
        <h2>Manage Users</h2>
@@ -29,11 +30,11 @@
 			<input type="search" name="keyword" th:value="${keyword}" class="form-control" required />
 			&nbsp;&nbsp;
 			<button type="submit" class="btn btn-primary">
-			<i class="fa-solid fa-magnifying-glass"></i>
+			<i class="fa-solid fa-magnifying-glass"> </i>
 			</button>
 			&nbsp;&nbsp;
 			<button type="button" value="Clear" class="btn btn-secondary" onclick="clearFilter()">
-				<i class="fa-solid fa-eraser"></i>
+				<i class="fa-solid fa-eraser"> </i>
 				</button>
 		</form>
 	</div>
@@ -44,17 +45,18 @@
 			<thead class="thead-dark">
 				<tr>
 					<th class="hideable-column">	
-					     <th th:replace="fragments :: column_link('id', 'User Id', 'tag')" ></th>  
+					     <th th:replace="fragments :: column_link('id', 'User Id', 'tag')"></th>  
 					</th>
 										
 					<th>Photos</th>
 					<th class="hideable-column">
-					<th th:replace="fragments :: column_link('email', 'Email', 'tag')" />
+					  <th th:replace="fragments :: column_link('email', 'Email', 'tag')" />
 					</th>
 					<th th:replace="fragments :: column_link('firstName', 'First Name', 'none')" />
 					<th th:replace="fragments :: column_link('lastName', 'Last Name', 'none')" />	
 					<th>Roles</th>
-					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'tag')" />  
+					<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')" /> 
+					<th></th> 
 				</tr>
 			</thead>
 			
@@ -135,25 +137,25 @@
 		<nav>
 			<ul class="pagination justify-content-center flex-wrap">
 				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-					<a th:replace="fragments :: page_link(1, 'First')"></a>
+					<a th:replace="fragments :: page_link(1, 'First')"> </a>
 				</li>
 				
 				
 				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-					<a th:replace="fragments :: page_link(${currentPage-1}, 'Pre')"></a>
+					<a th:replace="fragments :: page_link(${currentPage-1}, 'Pre')"> </a>
 				</li>
 				
 				<li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
 				 th:each="i : ${#numbers.sequence(1, totalPages)}">
-					<a th:replace="fragments :: page_link(${i}, ${i})"></a>
+					<a th:replace="fragments :: page_link(${i}, ${i})"> </a>
 					</li>
 					
 				<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-					<a th:replace="fragments :: page_link(${currentPage+1}, 'Next')"></a>
+					<a th:replace="fragments :: page_link(${currentPage+1}, 'Next')"> </a>
 					</li>
 						
 				<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-					<a th:replace="fragments :: page_link(${totalPages}, 'Last')"></a>
+					<a th:replace="fragments :: page_link(${totalPages}, 'Last')"> </a>
 					</li>
 			</ul>
 		</nav>
@@ -168,7 +170,7 @@
 		</div>
 		
 		<div class="modal-body">
-			<span id="confirmText"></span>		
+			<span id="confirmText"> </span>		
 		</div>
 		
 		<div class="modal-footer">
@@ -202,7 +204,7 @@
 			function clearFilter(){
 				window.location="/ShopmeAdmin/users"
 			}
-		
 	</script>
+	
 </body>
 </html>

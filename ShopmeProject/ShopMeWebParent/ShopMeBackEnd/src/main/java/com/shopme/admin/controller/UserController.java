@@ -33,7 +33,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@GetMapping("users")
+	@GetMapping("/users")
 	public String listAll(Model model) {
 		return listByPage(1, model, "id", "asc",null );
 	}
